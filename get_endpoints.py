@@ -20,10 +20,10 @@ def get_auth_token():
     # response = requests.post(url, auth=HTTPBasicAuth(dnac_config.DNA_CENTER['userName'], dnac_config.DNA_CENTER['userPasswd']), verify=False)
 
     # Retrieve the Token from the returned JSON
-    print(resp.json())
+    # print(resp.json())
     token = resp.json()['jwttoken']
     # Print out the Token
-    print("Token Retrieved: {}".format(token))
+    # print("Token Retrieved: {}".format(token))
     # Create a return statement to send the token back for later use
     return token
 
@@ -57,7 +57,7 @@ def get_endpoint_int():
     hdr = {'Authorization': token}
     resp = requests.get(url, headers=hdr, verify=False) 
     interface_info_json = resp.json()
-    print(interface_info_json)
+    # print(interface_info_json)
 
     format_endpoint_data(interface_info_json)
 
@@ -65,4 +65,4 @@ def get_endpoint_int():
 if __name__ == "__main__":
     # get_auth_token()
    get_endpoint_int()
-   format_endpoint_data()
+#    format_endpoint_data()

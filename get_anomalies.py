@@ -18,10 +18,10 @@ def get_auth_token():
     resp = requests.post(url='https://10.0.223.207/login', json=creds, verify=False)
     # Make the POST Request
     # Retrieve the Token from the returned JSON
-    print(resp.json())
+    # print(resp.json())
     token = resp.json()['jwttoken']
     # Print out the Token
-    print("Token Retrieved: {}".format(token))
+    # print("Token Retrieved: {}".format(token))
     # Create a return statement to send the token back for later use
     return token
 
