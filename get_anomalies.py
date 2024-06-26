@@ -4,6 +4,9 @@ from requests.auth import HTTPBasicAuth
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+def format_auth_token(token, line_length=64):
+    formatted_token = '\n'.join(token[i:i + line_length] for i in range (0, len(token), line_length))
+    return formatted_token
 
 def get_auth_token():
     # Endpoint URL
@@ -19,9 +22,12 @@ def get_auth_token():
     # Make the POST Request
     # Retrieve the Token from the returned JSON
     # print(resp.json())
-    token = resp.json()['jwttoken']
-    # Print out the Token
-    # print("Token Retrieved: {}".format(token))
+    token = resp.json().get('jwttoken', '')
+
+    # Print out the formatted Token
+    formatted_token = format_auth_token(token)
+    print("Token Retrieved:\n{}".format(formatted_token))
+
     # Create a return statement to send the token back for later use
     return token
 
