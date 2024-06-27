@@ -5,30 +5,43 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 def format_auth_token(token, line_length=64):
+    """
+    Formats the authentication token into readable lines.
+
+    Parameters: 
+    token (str): the authentication token to be formatted. 
+    line_length (int): The length of each line. Default is 64 characters.
+
+    Returns: 
+    str: The formatted token. 
+
+    """
     formatted_token = '\n'.join(token[i:i + line_length] for i in range (0, len(token), line_length))
     return formatted_token
 
 def get_auth_token():
+    """
+    Retrieves the authentication token from the endpoint.
+
+    Returns: 
+    str: The authentication token. 
+    """
     # Endpoint URL
-    url = 'https://10.0.223.201'
+    url = 'https://10.0.223.207'
     
     creds = {
         "userName": "cisco-live-ro",
         "userPasswd": "Ciscolive123",
         "domain": "DefaultAuth"
     }
-
-    resp = requests.post(url='https://10.0.223.201/login', json=creds, verify=False)
     # Make the POST Request
-    # response = requests.post(url, auth=HTTPBasicAuth(dnac_config.DNA_CENTER['userName'], dnac_config.DNA_CENTER['userPasswd']), verify=False)
-
+    resp = requests.post(url='https://10.0.223.207/login', json=creds, verify=False)
     # Retrieve the Token from the returned JSON
-    # print(resp.json())
     token = resp.json().get('jwttoken', '')
-
     # Print out the formatted Token
     formatted_token = format_auth_token(token)
     print("Token Retrieved:\n{}".format(formatted_token))
+    # Create a return statement to send the token back for later use
     return token
 
 def format_endpoint_data(endpoint_data):
